@@ -9,11 +9,14 @@ const col = () => collection(db, 'contacts')
 
 export type ContactInput = Omit<Contact, 'id' | 'createdAt' | 'updatedAt'>
 
-export function subscribeContacts(cb: (contacts: Contact[]) => void): Unsubscribe {
+export function subscribeContacts(
+  cb: (contacts: Contact[]) => void,
+  onError?: (err: Error) => void,
+): Unsubscribe {
   const q = query(col(), orderBy('createdAt', 'desc'))
   return onSnapshot(q, (snap) => {
     cb(snap.docs.map((d) => ({ id: d.id, ...d.data() } as Contact)))
-  })
+  }, onError)
 }
 
 export async function createContact(data: ContactInput): Promise<string> {

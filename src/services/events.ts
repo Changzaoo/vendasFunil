@@ -9,11 +9,14 @@ const col = () => collection(db, 'events')
 
 export type EventInput = Omit<CalendarEvent, 'id' | 'createdAt'>
 
-export function subscribeEvents(cb: (list: CalendarEvent[]) => void): Unsubscribe {
+export function subscribeEvents(
+  cb: (list: CalendarEvent[]) => void,
+  onError?: (err: Error) => void,
+): Unsubscribe {
   const q = query(col(), orderBy('datetime', 'asc'))
   return onSnapshot(q, (snap) => {
     cb(snap.docs.map((d) => ({ id: d.id, ...d.data() } as CalendarEvent)))
-  })
+  }, onError)
 }
 
 export async function createEvent(data: EventInput): Promise<string> {

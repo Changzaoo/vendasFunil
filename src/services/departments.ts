@@ -9,11 +9,14 @@ const col = () => collection(db, 'departments')
 
 export type DepartmentInput = Omit<Department, 'id' | 'createdAt'>
 
-export function subscribeDepartments(cb: (list: Department[]) => void): Unsubscribe {
+export function subscribeDepartments(
+  cb: (list: Department[]) => void,
+  onError?: (err: Error) => void,
+): Unsubscribe {
   const q = query(col(), orderBy('name', 'asc'))
   return onSnapshot(q, (snap) => {
     cb(snap.docs.map((d) => ({ id: d.id, ...d.data() } as Department)))
-  })
+  }, onError)
 }
 
 export async function createDepartment(data: DepartmentInput): Promise<string> {

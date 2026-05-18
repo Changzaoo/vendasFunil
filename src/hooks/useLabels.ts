@@ -5,14 +5,15 @@ import type { Label } from '@/types'
 export function useLabels() {
   const [labels, setLabels] = useState<Label[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const unsub = subscribeLabels((data) => {
-      setLabels(data)
-      setLoading(false)
-    })
+    const unsub = subscribeLabels(
+      (data) => { setLabels(data); setLoading(false) },
+      (err) => { setError(err.message); setLoading(false) },
+    )
     return unsub
   }, [])
 
-  return { labels, loading }
+  return { labels, loading, error }
 }

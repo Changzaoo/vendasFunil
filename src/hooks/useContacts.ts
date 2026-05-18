@@ -8,10 +8,10 @@ export function useContacts() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const unsub = subscribeContacts((data) => {
-      setContacts(data)
-      setLoading(false)
-    })
+    const unsub = subscribeContacts(
+      (data) => { setContacts(data); setLoading(false) },
+      (err) => { setError(err.message); setLoading(false) },
+    )
     return unsub
   }, [])
 

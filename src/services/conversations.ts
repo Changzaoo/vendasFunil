@@ -10,18 +10,25 @@ const msgCol = (convId: string) => collection(db, 'conversations', convId, 'mess
 
 export type ConversationInput = Omit<Conversation, 'id' | 'createdAt' | 'lastMessageAt' | 'unread' | 'lastMessage'>
 
-export function subscribeConversations(cb: (list: Conversation[]) => void): Unsubscribe {
+export function subscribeConversations(
+  cb: (list: Conversation[]) => void,
+  onError?: (err: Error) => void,
+): Unsubscribe {
   const q = query(col(), orderBy('lastMessageAt', 'desc'))
   return onSnapshot(q, (snap) => {
     cb(snap.docs.map((d) => ({ id: d.id, ...d.data() } as Conversation)))
-  })
+  }, onError)
 }
 
-export function subscribeMessages(convId: string, cb: (msgs: Message[]) => void): Unsubscribe {
+export function subscribeMessages(
+  convId: string,
+  cb: (msgs: Message[]) => void,
+  onError?: (err: Error) => void,
+): Unsubscribe {
   const q = query(msgCol(convId), orderBy('timestamp', 'asc'))
   return onSnapshot(q, (snap) => {
     cb(snap.docs.map((d) => ({ id: d.id, ...d.data() } as Message)))
-  })
+  }, onError)
 }
 
 export async function createConversation(data: ConversationInput): Promise<string> {

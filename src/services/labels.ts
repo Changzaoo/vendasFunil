@@ -9,11 +9,14 @@ const col = () => collection(db, 'labels')
 
 export type LabelInput = Omit<Label, 'id' | 'createdAt'>
 
-export function subscribeLabels(cb: (list: Label[]) => void): Unsubscribe {
+export function subscribeLabels(
+  cb: (list: Label[]) => void,
+  onError?: (err: Error) => void,
+): Unsubscribe {
   const q = query(col(), orderBy('name', 'asc'))
   return onSnapshot(q, (snap) => {
     cb(snap.docs.map((d) => ({ id: d.id, ...d.data() } as Label)))
-  })
+  }, onError)
 }
 
 export async function createLabel(data: LabelInput): Promise<string> {

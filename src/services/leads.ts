@@ -9,11 +9,14 @@ const col = () => collection(db, 'leads')
 
 export type LeadInput = Omit<Lead, 'id' | 'createdAt' | 'updatedAt'>
 
-export function subscribeLeads(cb: (leads: Lead[]) => void): Unsubscribe {
+export function subscribeLeads(
+  cb: (leads: Lead[]) => void,
+  onError?: (err: Error) => void,
+): Unsubscribe {
   const q = query(col(), orderBy('createdAt', 'desc'))
   return onSnapshot(q, (snap) => {
     cb(snap.docs.map((d) => ({ id: d.id, ...d.data() } as Lead)))
-  })
+  }, onError)
 }
 
 export async function createLead(data: LeadInput): Promise<string> {
