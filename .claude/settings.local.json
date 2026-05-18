@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "PowerShell(Get-Command node -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command \"C:\\\\Program Files\\\\nodejs\\\\node.exe\" -ErrorAction SilentlyContinue)",
+      "PowerShell($env:PATH)",
+      "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\nodejs\\\\;C:\\\\Users\\\\vinicius\\\\AppData\\\\Roaming\\\\npm\"; node --version; npm --version)",
+      "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\nodejs\\\\;C:\\\\Users\\\\vinicius\\\\AppData\\\\Roaming\\\\npm\"; Get-Command git -ErrorAction SilentlyContinue; & \"C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe\" --version -ErrorAction SilentlyContinue)",
+      "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\nodejs\\\\;C:\\\\Users\\\\vinicius\\\\AppData\\\\Roaming\\\\npm\"; cd \"c:\\\\Users\\\\vinicius\\\\teste\"; npm create vite@latest . -- --template react-ts 2>&1 | Select-String -Pattern \".\" | Select-Object -First 30)",
+      "PowerShell($env:PATH = $env:PATH + \";C:\\\\Program Files\\\\nodejs\\\\;C:\\\\Users\\\\vinicius\\\\AppData\\\\Roaming\\\\npm\"; cd \"c:\\\\Users\\\\vinicius\\\\teste\"; npm install 2>&1 | Select-Object -Last 10)"
+    ]
+  }
+}
