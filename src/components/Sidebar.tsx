@@ -65,7 +65,7 @@ type NavGroupProps = {
 function NavGroup({ title, items, location, navigate }: NavGroupProps) {
   return (
     <div className="mb-4">
-      <p className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-widest text-apple-text-4">
+      <p className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-widest text-apple-text-4 dark:text-[#636366]">
         {title}
       </p>
       <div className="space-y-0.5">
@@ -87,17 +87,17 @@ export function Sidebar() {
 
   return (
     <aside
-      className="fixed top-0 left-0 h-screen bg-white border-r border-apple-gray-3 flex flex-col z-30"
+      className="fixed top-0 left-0 h-screen bg-white dark:bg-[#2C2C2E] border-r border-apple-gray-3 dark:border-[#3A3A3C] flex flex-col z-30"
       style={{ width: 'var(--sidebar-width)' }}
     >
       {/* Logo */}
-      <div className="flex items-center gap-3 px-4 py-4 border-b border-apple-gray-3">
+      <div className="flex items-center gap-3 px-4 py-4 border-b border-apple-gray-3 dark:border-[#3A3A3C]">
         <div className="w-8 h-8 rounded-[8px] bg-apple-blue flex items-center justify-center shadow-sm">
           <Zap size={16} className="text-white" strokeWidth={2.5} />
         </div>
         <div>
-          <p className="text-sm font-semibold text-apple-text leading-none">Sales AI</p>
-          <p className="text-[10px] text-apple-text-4 mt-0.5">Assistente de Vendas</p>
+          <p className="text-sm font-semibold text-apple-text dark:text-[#F5F5F7] leading-none">Sales AI</p>
+          <p className="text-[10px] text-apple-text-4 dark:text-[#636366] mt-0.5">Assistente de Vendas</p>
         </div>
       </div>
 
@@ -109,14 +109,14 @@ export function Sidebar() {
       </nav>
 
       {/* User */}
-      <div className="px-3 pb-4 border-t border-apple-gray-3 pt-3">
+      <div className="px-3 pb-4 border-t border-apple-gray-3 dark:border-[#3A3A3C] pt-3">
         <div className="flex items-center gap-3 px-2 py-1.5">
           <div className="w-8 h-8 rounded-full bg-apple-blue/10 flex items-center justify-center text-xs font-semibold text-apple-blue">
             VS
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-apple-text truncate">Vinicius</p>
-            <p className="text-xs text-apple-text-4 truncate">Admin</p>
+            <p className="text-sm font-medium text-apple-text dark:text-[#F5F5F7] truncate">Vinicius</p>
+            <p className="text-xs text-apple-text-4 dark:text-[#636366] truncate">Admin</p>
           </div>
         </div>
       </div>

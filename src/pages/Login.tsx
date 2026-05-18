@@ -92,12 +92,6 @@ export default function Login() {
           </form>
         </div>
 
-        <p className="text-center text-xs text-apple-text-4 mt-6">
-          Configure sua conta no{' '}
-          <a href="https://console.firebase.google.com" target="_blank" rel="noreferrer" className="text-apple-blue hover:underline">
-            Firebase Console
-          </a>
-        </p>
       </div>
     </div>
   )
